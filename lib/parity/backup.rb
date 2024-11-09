@@ -73,7 +73,7 @@ module Parity
     end
 
     def ensure_temp_directory_exists
-      Kernel.system("mkdir -p tmp")
+      Kernel.system("mkdir tmp")
     end
 
     def download_remote_backup
