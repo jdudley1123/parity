@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> This is a fork of Thoughbot's Parity gem to get the core functionality to work on Windows
+
 Parity
 ======
 
