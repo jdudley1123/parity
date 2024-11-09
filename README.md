@@ -1,5 +1,6 @@
 > [!IMPORTANT]  
 > This is a fork of Thoughbot's Parity gem to get the core functionality to work on Windows
+> Note that the gem now creates a backup on Heroku before commencing. Heroky may automatically delete older backups.
 
 Parity
 ======
