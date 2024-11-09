@@ -77,16 +77,15 @@ module Parity
     end
 
     def download_remote_backup
-      Kernel.system(
-        "curl -o tmp/latest.backup \"$(heroku pg:backups:url --remote #{from})\"",
-      )
+      url = `#{remote_db_backup_url}`.strip
+      Kernel.system("curl -o tmp/latest.backup \"#{url}\"")
     end
 
     def restore_from_local_temp_backup
       Kernel.system(
-        "pg_restore tmp/latest.backup --verbose --no-acl --no-owner "\
+        "pg_restore --verbose --no-acl --no-owner "\
           "--dbname #{development_db} --jobs=#{processor_cores} "\
-          "#{additional_args}",
+          "#{additional_args} tmp/latest.backup",
       )
     end
 
