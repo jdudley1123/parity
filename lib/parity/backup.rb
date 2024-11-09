@@ -55,7 +55,7 @@ module Parity
 
     def create_heroku_ext_schema
       Kernel.system(<<~SHELL)
-        psql #{development_db} -c "
+        psql -d #{development_db} -c "
           CREATE SCHEMA IF NOT EXISTS heroku_ext;
         "
       SHELL
@@ -96,7 +96,7 @@ module Parity
 
     def delete_rails_production_environment_settings
       Kernel.system(<<-SHELL)
-        psql #{development_db} -c "CREATE TABLE IF NOT EXISTS public.ar_internal_metadata (key character varying NOT NULL, value character varying, created_at timestamp without time zone NOT NULL, updated_at timestamp without time zone NOT NULL, CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key)); UPDATE ar_internal_metadata SET value = 'development' WHERE key = 'environment'"
+        psql -d #{development_db} -c "CREATE TABLE IF NOT EXISTS public.ar_internal_metadata (key character varying NOT NULL, value character varying, created_at timestamp without time zone NOT NULL, updated_at timestamp without time zone NOT NULL, CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key)); UPDATE ar_internal_metadata SET value = 'development' WHERE key = 'environment'"
       SHELL
     end
 
