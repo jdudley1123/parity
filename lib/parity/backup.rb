@@ -39,6 +39,7 @@ module Parity
 
     def restore_to_development
       ensure_temp_directory_exists
+      create_remote_backup
       download_remote_backup
       wipe_development_database
       create_heroku_ext_schema
@@ -74,6 +75,10 @@ module Parity
 
     def ensure_temp_directory_exists
       Kernel.system("mkdir tmp")
+    end
+
+    def create_remote_backup
+      Kernel.system("heroku pg:backups:capture --remote #{from}")
     end
 
     def download_remote_backup
